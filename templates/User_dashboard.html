@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Features - Banking Application</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        h3{
+            margin-top:40px;
+        }
+
+        input[type="number"], input[type="text"] {
+            width: 90%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background-color: #f39c12; /* Warm orange */
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .footer a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #f39c12;
+        }
+
+        .transactions {
+            text-align: left;
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        #transactionHistory{
+            margin-top:50px;
+            margin-bottom:50px
+        }
+
+        .flash-messages{
+            font-size:20px;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Dashboard</h1>
+        <!-- Block for displaying flash messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form id="withdrawForm" action="/withdraw" method="POST">
+            <h3>Withdraw Cash</h3>
+            <input type="number" name="withdraw_amount" placeholder="Amount to Withdraw" required>
+            <button class="btn" type="submit">Withdraw</button>
+        </form>
+
+        <form id="depositForm" action="/deposit" method="POST">
+            <h3>Deposit Cash</h3>
+            <input type="number" name="deposit_amount" placeholder="Amount to Deposit" required>
+            <button class="btn" type="submit">Deposit</button>
+        </form>
+
+        <form id="check_balance" action="/balance" method="POST">
+            <div>
+                <h3>Check Account Balance</h3>
+                
+                <!-- Display the balance inside a styled div -->
+                <div id="accountBalance" style="
+                    padding: 6px;
+                    border: 2px solid #ccc;
+                    border-radius: 5px;
+                    font-size: 1.5rem;
+                    text-align: center;
+                    background-color: #f9f9f9;
+                    color: #333;
+                    margin-bottom: 10px;
+                ">
+                    ${{ current_balance }}
+                </div>
+                
+                <!-- Button to refresh the balance -->
+                <button class="btn" type="submit">Refresh Balance</button>
+            </div>
+        </form>
+        
+
+        <form id="transactionHistory" action="/view_transaction" method="POST">
+        <div>
+            <h3>View Transactions</h3>
+            <button class="btn">View Transactions</button>
+        </div>
+        </form>
+
+        
+        <form action="/change_password" method="GET">
+            <h3>Change Password</h3>
+            <button class="btn" type="submit">Change Password</button>
+        </form>
+
+        <form method='POST'>
+        <div class="footer">
+            <a href="/user_login">Back to Dashboard</a>
+        </div>
+        </form>
+    </div>
+</body>
+</html>

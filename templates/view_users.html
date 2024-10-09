@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Users</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(80deg, #ffecd2 0%, #fcb69f 100%);
+            margin: 0;
+            padding: 20px;
+        }
+    
+        
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+        }
+
+        h2 {
+            font-size:30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+        
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        th {
+            background-color: #f39c12; /* Header background color */
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8d49f; /* Light background for even rows */
+        }
+        
+        tr:nth-child(odd) {
+            background-color: #ffecd2; /* Light background for odd rows */
+        }
+        
+        tr:hover {
+            background-color: #fcb69f; /* Hover effect for rows */
+            transition: background-color 0.3s;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #f39c12;
+            font-size: 18px;
+        }
+        
+        .back-link:hover {
+            color: #d35400;
+        }
+        
+        .btn-custom {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            margin-left: 83%;
+        }
+        
+        .btn-custom:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            transform: scale(1.05); /* Slight scale effect */
+        }
+        
+
+    </style>
+</head>
+<body>
+    <h2>User List</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Proof ID</th>
+                <th>Account Type</th>
+                <th>Occupation</th>
+                <th>Date of Birth</th>
+                <th>Nationality</th>
+                <th>Savings Amount</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.account_number }}</td>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.email_id }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.ph_no }}</td>
+                <td>{{ user.proof_id }}</td>
+                <td>{{ user.account_type }}</td>
+                <td>{{ user.occupation }}</td>
+                <td>{{ user.dob }}</td>
+                <td>{{ user.nationality }}</td>
+                <td>{{ user.savings_amount }}</td>
+                <td>*****</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Button to Return to Admin Dashboard -->
+    <a class="btn-custom" href="/admin_dashboard">Return to Admin Dashboard</a>
+
+</body>
+</html>

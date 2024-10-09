@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - Banking Application</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #f39c12;
+            font-size: 18px;
+        }
+
+        .back-link:hover {
+            color: #d35400;
+        }
+
+        .btn-custom {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+            text-decoration: none;
+            margin-left: 78%;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3; /* Darker shade for hover effect */
+            transform: scale(1.05); /* Slight scale effect */
+        }
+    </style>
+    </style>
+
+    </style>
+</head>
+<body>
+    <form id="view_transactions" action="/view_transaction" method="POST">
+    <div class="container">
+        <h1>Transaction History</h1>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Account Number</th>
+                    <th>Activity</th>
+                    <th>Transaction Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if transactions %}
+                    {% for transaction in transactions %}
+                        <tr>
+                            <td>{{ transaction.id }}</td>
+                            <td>{{ transaction.username }}</td>
+                            <td>{{ transaction.account_number }}</td>
+                            <td>{{ transaction.activity }}</td>
+                            <td>{{ transaction.transaction_date }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                {% endif %}
+            </tbody>
+        </table>
+
+
+            <a class="btn-custom" type="submit" href="/user_dashboard_1">View Transactions</a>
+        </form>
+        
+    </div>
+
+</body>
+</html>

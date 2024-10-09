@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Account - Banking Application</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            height: 100%;
+            padding: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 450px; /* Increased width for better alignment */
+
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="number"], input[type="date"], select {
+            width: 90%;
+            padding: 15px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background-color: #f39c12; /* Warm orange */
+            color: #fff;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 50%;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .footer a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: #f39c12;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Update Existing Account</h1>
+
+            <!-- Block for displaying flash messages -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form method="POST" action="{{ url_for('perform_update') }}">
+            <input type="hidden" name="account_number" value="{{ user.account_number }}">  <!-- Assuming account_number is at index 11 -->
+        
+            <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" placeholder="First Name" required>
+            
+            <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" placeholder="Last Name" required>
+            
+            <input type="email" id="email" name="email" value="{{ user.email_id }}" placeholder="Email" required>
+            
+            <input type="text" id="address" name="address" value="{{ user.address }}" placeholder="Address" required>
+            
+            <input type="tel" id="phone" name="phone" value="{{ user.ph_no }}" placeholder="Phone Number" required>
+
+            <select id="proof_type" name="proof_type" placeholder="Select Proof Type" required>
+                <option value="Aadhar Card" {% if user.proof_type == 'Aadhar Card' %}selected{% endif %}>Aadhar Card</option>
+                <option value="Pan Card" {% if user.proof_type == 'Pan Card' %}selected{% endif %}>Pan Card</option>
+                <option value="Driving License" {% if user.proof_type == 'Driving License' %}selected{% endif %}>Driving License</option>
+            </select>
+            
+            <input type="text" id="proof_id" name="proof_id" value="{{ user.proof_id }}" placeholder="Proof ID" required>
+            
+            <select id="account_type" name="account_type" placeholder="Account Type" required>
+                <option value="savings" {% if user.account_type == 'savings' %}selected{% endif %}>Savings Account</option>
+                <option value="current" {% if user.account_type == 'current' %}selected{% endif %}>Current Account</option>
+                <option value="joint" {% if user.account_type == 'joint' %}selected{% endif %}>Joint Account</option>
+            </select>
+            
+            <input type="text" id="occupation" name="occupation" value="{{ user.occupation }}" placeholder="Occupation" required>
+            
+            <input type="text" id="dob" name="dob" value="{{ user.dob }}" placeholder="Date of Birth" required onfocus="this.type='date'" onblur="this.type='text'">
+                        
+            <input type="text" id="nationality" name="nationality" value="{{ user.nationality }}" placeholder="Nationality" required>
+            
+            <button class="btn" type="submit">Update Details</button>
+        
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul>
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
+        </form>
+        
+
+        <div class="footer">
+            Already have an account? <a href="/user_login">Login Here</a>
+        </div>
+    </div>
+
+</body>
+</html>
